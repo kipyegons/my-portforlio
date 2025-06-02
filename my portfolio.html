@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dickson Kipyegon Siele | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --gold: #FFD700;
+            --gold-light: #FFF8DC;
+            --gold-dark: #BFA100;
+            --black: #181818;
+            --dark: #222;
+            --light: #fff;
+            --gray: #444;
+            --radius: 16px;
+            --transition: 0.5s cubic-bezier(.77,0,.18,1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--black);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(90deg, var(--black) 70%, var(--gold) 100%);
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            height: 110px;
+            box-shadow: 0 4px 24px #0008;
+            position: relative;
+            z-index: 10;
+        }
+        .passport {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            object-fit: cover;
+            margin-right: 24px;
+            background: var(--gray);
+        }
+        .name {
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--gold);
+            flex: 1;
+            text-shadow: 1px 2px 8px #000a;
+        }
+        nav {
+            position: absolute;
+            bottom: -38px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            background: rgba(24,24,24,0.98);
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: 0 8px 24px #0006;
+            padding: 8px 0;
+            z-index: 9;
+        }
+        nav a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 6px 18px;
+            border-radius: 8px;
+            transition: background var(--transition), color var(--transition);
+        }
+        nav a.active, nav a:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        main {
+            margin-top: 90px;
+            padding: 48px 24px 24px 24px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 70vh;
+            border-radius: var(--radius);
+            background: linear-gradient(120deg, #222 80%, #FFD70022 100%);
+            box-shadow: 0 8px 32px #0005;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        section {
+            display: none;
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: all var(--transition);
+            min-height: 400px;
+        }
+        section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            animation: morphIn 0.7s cubic-bezier(.77,0,.18,1);
+        }
+        @keyframes morphIn {
+            from { opacity: 0; transform: scale(0.95) translateY(40px);}
+            to { opacity: 1; transform: scale(1) translateY(0);}
+        }
+        .home-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .home-desc {
+            font-size: 1.3rem;
+            margin-bottom: 32px;
+            color: #fff;
+            opacity: 0.85;
+            text-align: center;
+        }
+        .hire-btn {
+            background: var(--gold);
+            color: var(--black);
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 36px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px #FFD70044;
+            transition: background var(--transition), color var(--transition), transform 0.2s;
+            display: block;
+            margin: 0 auto;
+        }
+        .hire-btn:hover {
+            background: #fff;
+            color: var(--gold);
+            transform: scale(1.05);
+        }
+        .headline {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        /* Gold Card Styles */
+        .gold-card {
+            background: linear-gradient(135deg, var(--gold-light) 80%, var(--gold-dark) 100%);
+            border-radius: var(--radius);
+            box-shadow: 0 4px 24px #FFD70044, 0 1.5px 0 var(--gold-dark);
+            border: 2px solid var(--gold);
+            padding: 24px 18px;
+            margin-bottom: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+            color: var(--black);
+            text-align: center;
+            position: relative;
+            overflow: visible;
+        }
+        /* About Section */
+        .edu-list {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+        }
+        .edu-item {
+            width: 100%;
+            max-width: 420px;
+        }
+        .edu-date {
+            font-size: 1rem;
+            color: var(--gold-dark);
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .edu-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 2px;
+            color: var(--black);
+        }
+        .edu-status {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 2px;
+        }
+        /* Services Section */
+        .services-list {
+            list-style: none;
+            margin-top: 18px;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+        }
+        .services-list li {
+            width: 100%;
+            max-width: 420px;
+        }
+        /* Skills Section */
+        .skills-list {
+            list-style: none;
+            margin-top: 18px;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+        }
+        .skills-list li {
+            width: 100%;
+            max-width: 420px;
+        }
+        /* Teams Section */
+        .teams-list {
+            list-style: none;
+            margin-top: 18px;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+        }
+        .teams-list li {
+            background: #232323;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border-left: 4px solid var(--gold);
+            color: #fff;
+            font-size: 1.08rem;
+            box-shadow: 0 2px 8px #FFD70022;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 420px;
+            justify-content: center;
+            text-align: center;
+        }
+        /* Contact Section */
+        .contact-list {
+            list-style: none;
+            margin-top: 18px;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+        }
+        .contact-list li {
+            background: #232323;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border-left: 4px solid var(--gold);
+            color: #fff;
+            font-size: 1.08rem;
+            box-shadow: 0 2px 8px #FFD70022;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 420px;
+            justify-content: center;
+            text-align: center;
+        }
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .contact-label {
+            font-weight: 500;
+            color: var(--gold);
+            margin-right: 8px;
+        }
+        .address, .nationality {
+            margin-top: 18px;
+            font-size: 1.08rem;
+            color: #fff;
+            background: #232323;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 2px 8px #FFD70022;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Hire Modal Styles */
+        .hire-modal-bg {
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            background: rgba(24, 24, 24, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInBg 0.3s;
+        }
+        @keyframes fadeInBg {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .hire-modal {
+            background: linear-gradient(120deg, var(--gold-light) 80%, var(--gold-dark) 100%);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 32px #FFD70088, 0 1.5px 0 var(--gold-dark);
+            border: 2px solid var(--gold);
+            padding: 36px 28px 28px 28px;
+            min-width: 320px;
+            max-width: 90vw;
+            color: var(--black);
+            text-align: center;
+            position: relative;
+            animation: popIn 0.4s cubic-bezier(.77,0,.18,1);
+        }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.85);}
+            to { opacity: 1; transform: scale(1);}
+        }
+        .hire-modal h2 {
+            color: var(--gold-dark);
+            margin-bottom: 18px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .hire-modal .hire-options {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .hire-modal .hire-option-btn {
+            background: var(--gold);
+            color: var(--black);
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 0;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #FFD70044;
+            transition: background var(--transition), color var(--transition), transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .hire-modal .hire-option-btn:hover {
+            background: #fff;
+            color: var(--gold);
+            transform: scale(1.04);
+        }
+        .hire-modal .close-btn, .hire-modal .freeze-btn {
+            position: absolute;
+            top: 10px;
+            font-size: 1.1rem;
+            background: none;
+            border: none;
+            color: var(--gold-dark);
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        .hire-modal .close-btn:hover, .hire-modal .freeze-btn:hover {
+            color: #d4af37;
+        }
+        .hire-modal .close-btn {
+            right: 16px;
+        }
+        .hire-modal .freeze-btn {
+            left: 16px;
+        }
+        .hire-modal.frozen {
+            pointer-events: none;
+            opacity: 0.85;
+            filter: grayscale(0.2) blur(1px);
+        }
+        /* Animated Stars and Flowers */
+        .floating-ornament {
+            position: absolute;
+            z-index: 2;
+            pointer-events: none;
+            animation: floatUp linear forwards;
+            will-change: transform, opacity;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(60px) scale(var(--scale));
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120px) scale(var(--scale));
+                opacity: 0;
+            }
+        }
+        /* Responsive */
+        @media (max-width: 700px) {
+            header { flex-direction: column; height: auto; padding: 16px 8px; }
+            .passport { margin: 0 0 10px 0; }
+            .name { font-size: 1.3rem; text-align: center; }
+            nav { gap: 12px; font-size: 0.95rem; }
+            main { padding: 18px 4px; }
+            .headline { font-size: 1.2rem; }
+            .gold-card, .edu-item, .services-list li, .skills-list li, .teams-list li, .contact-list li, .address, .nationality {
+                max-width: 98vw;
+            }
+            .hire-modal { min-width: 90vw; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Stars and Flowers -->
+    <div id="ornaments"></div>
+    <header>
+        <img src ="c:\Users\DELL\Desktop\my port\pp.jpg" alt="Passport Photo" class="passport" />
+        <span class="name">Dickson Kipyegon Siele</span>
+        <nav>
+            <a href="#" class="active" data-section="home">Home</a>
+            <a href="#" data-section="about">About</a>
+            <a href="#" data-section="services">Services</a>
+            <a href="#" data-section="skills">Skills</a>
+            <a href="#" data-section="teams">Teams</a>
+            <a href="#" data-section="contact">Contacts</a>
+        </nav>
+    </header>
+    <main>
+        <!-- Home -->
+        <section id="home" class="active">
+            <div class="home-title">A Software Engineer</div>
+            <div class="home-desc">I'm a developer passionate about building secure, scalable, and innovative solutions.</div>
+            <button class="hire-btn" onclick="showHireModal()">Hire Me</button>
+        </section>
+        <!-- About -->
+        <section id="about">
+            <div class="headline">ÉDUCATION</div>
+            <div class="edu-list">
+                <div class="gold-card edu-item">
+                    <div class="edu-date">02/06/2022</div>
+                    <div class="edu-title">Cisco Networking Academy & Zetech University<br>Cyber security</div>
+                    <div class="edu-status">Pass</div>
+                </div>
+                <div class="gold-card edu-item">
+                    <div class="edu-date">08/06/2022</div>
+                    <div class="edu-title">Cisco Networking Academy & Zetech University<br>Network Engineering</div>
+                    <div class="edu-status">Pass</div>
+                </div>
+                <div class="gold-card edu-item">
+                    <div class="edu-date">03/08/2022</div>
+                    <div class="edu-title">Cisco Networking Academy & Zetech University<br>CCNAv7 2 (switching, routing and wireless tech)</div>
+                    <div class="edu-status">Pass</div>
+                </div>
+                <div class="gold-card edu-item">
+                    <div class="edu-date">21/05/2024</div>
+                    <div class="edu-title">Cisco Networking Academy<br>DevNet Associate</div>
+                    <div class="edu-status">Pass</div>
+                </div>
+                <div class="gold-card edu-item">
+                    <div class="edu-date">20/08/2025</div>
+                    <div class="edu-title">Cisco Networking Academy<br>Ethical Hacker</div>
+                    <div class="edu-status">Pass</div>
+                </div>
+                <div class="gold-card edu-item">
+                    <div class="edu-date">21/03/2025</div>
+                    <div class="edu-title">Cisco Networking Academy & Zetech University<br>Network Defense</div>
+                    <div class="edu-status">Pass</div>
+                </div>
+                <div class="gold-card edu-item">
+                    <div class="edu-date">21/03/2025</div>
+                    <div class="edu-title">Cisco Networking Academy & Zetech University<br>EndPoint Security</div>
+                    <div class="edu-status">Pass</div>
+                </div>
+                <div class="gold-card edu-item">
+                    <div class="edu-date">20/12/2024</div>
+                    <div class="edu-title">Power Learn Project<br>Software Development</div>
+                    <div class="edu-status">Pass</div>
+                </div>
+                <div class="gold-card edu-item">
+                    <div class="edu-date">Ongoing</div>
+                    <div class="edu-title">Kenya Institute of Applied sciences<br>Biomedical engineering</div>
+                    <div class="edu-status">NA</div>
+                </div>
+                <div class="gold-card edu-item">
+                    <div class="edu-date">Ongoing</div>
+                    <div class="edu-title">Zetech University<br>Software engineering</div>
+                    <div class="edu-status">Ongoing</div>
+                </div>
+            </div>
+        </section>
+        <!-- Services -->
+        <section id="services">
+            <div class="headline">Services</div>
+            <ul class="services-list">
+                <li class="gold-card">Cybersecurity including web defense, firewall installation, penetration testing and ethical hacking.</li>
+                <li class="gold-card">Web development including both front end, backend and database.</li>
+                <li class="gold-card">Network management including switch, router, server, VLAN configuration, troubleshooting VLAN routing, Database Management.</li>
+                <li class="gold-card">Database management and automation and addressing schemes.</li>
+            </ul>
+        </section>
+        <!-- Skills -->
+        <section id="skills">
+            <div class="headline">Skills</div>
+            <ul class="skills-list">
+                <li class="gold-card">Network Defense</li>
+                <li class="gold-card">Web technologies</li>
+                <li class="gold-card">Ethical Hacking</li>
+                <li class="gold-card">Switch configuration</li>
+                <li class="gold-card">Router configuration</li>
+                <li class="gold-card">Create Addressing schemes</li>
+                <li class="gold-card">Verify Network Connectivity Between devices</li>
+                <li class="gold-card">V-lan and Intervlan Configuration</li>
+                <li class="gold-card">Troubleshooting Inter-Vlan routing and Ether channel</li>
+                <li class="gold-card">Configuration of dynamic address allocation, WLANs and L2 security</li>
+                <li class="gold-card">Web Technologies, Database Management, Dart with Flutter and Python Development</li>
+                <li class="gold-card">Digital/Binary data forensics</li>
+            </ul>
+        </section>
+        <!-- Teams -->
+        <section id="teams">
+            <div class="headline">Teams</div>
+            <ul class="teams-list">
+                <li>Eldohub</li>
+                <li>Eldoret Junior DEVs</li>
+                <li>PLP young Talent</li>
+                <li>I-ZeT Hub</li>
+                <li>KICTAnet</li>
+            </ul>
+        </section>
+        <!-- Contact -->
+        <section id="contact">
+            <div class="headline">Contact</div>
+            <ul class="contact-list">
+                <li>
+                    <span class="contact-icon">
+                        <!-- Email SVG -->
+                        <svg width="24" height="24" fill="none" stroke="gold" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+                    </span>
+                    <span class="contact-label">Email:</span>
+                    <a href="mailto:kipyegon601@gmail.com" style="color:var(--gold);text-decoration:underline;">kipyegon601@gmail.com</a>
+                </li>
+                <li>
+                    <span class="contact-icon">
+                        <!-- Phone SVG -->
+                        <svg width="24" height="24" fill="none" stroke="gold" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92V21a2 2 0 0 1-2.18 2A19.72 19.72 0 0 1 3 5.18 2 2 0 0 1 5 3h4.09a2 2 0 0 1 2 1.72c.13 1.13.37 2.23.72 3.28a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c1.05.35 2.15.59 3.28.72A2 2 0 0 1 22 16.92z"/></svg>
+                    </span>
+                    <span class="contact-label">Phone:</span>
+                    <a href="tel:+254742555198" style="color:var(--gold);text-decoration:underline;">+254742555198</a>
+                </li>
+                <li>
+                    <span class="contact-icon">
+                        <!-- WhatsApp SVG -->
+                        <svg width="24" height="24" fill="none" stroke="gold" stroke-width="2" viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.12.55 4.13 1.6 5.92L0 24l6.18-1.62A11.93 11.93 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 22c-1.85 0-3.63-.5-5.18-1.44l-.37-.22-3.67.96.98-3.57-.24-.37A9.93 9.93 0 0 1 2 12c0-5.52 4.48-10 10-10s10 4.48 10 10-4.48 10-10 10zm5.2-7.8c-.28-.14-1.65-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.12-.12.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.97.95-.97 2.32 0 1.37.99 2.7 1.13 2.89.14.18 1.95 2.98 4.74 4.06.66.28 1.18.45 1.58.58.66.21 1.26.18 1.73.11.53-.08 1.65-.67 1.89-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.18-.53-.32z"/></svg>
+                    </span>
+                    <span class="contact-label">WhatsApp:</span>
+                    <a href="https://wa.me/254742555198" target="_blank" style="color:var(--gold);text-decoration:underline;">+254742555198</a>
+                </li>
+            </ul>
+            <div class="nationality"><b>Nationality:</b> Kenyan</div>
+            <div class="address"><b>Physical Address:</b> P.O. Box 288-30600, Molo</div>
+        </section>
+    </main>
+    <!-- Hire Modal (hidden by default) -->
+    <div id="hire-modal-bg" class="hire-modal-bg" style="display:none;">
+        <div id="hire-modal" class="hire-modal">
+            <button class="freeze-btn" onclick="toggleFreeze(event)">Freeze</button>
+            <button class="close-btn" onclick="closeHireModal()">&times;</button>
+            <h2>Contact Dickson Kipyegon Siele</h2>
+            <div class="hire-options">
+                <button class="hire-option-btn" onclick="window.location.href='mailto:kipyegon601@gmail.com'">
+                    <svg width="22" height="22" fill="none" stroke="gold" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+                    Email
+                </button>
+                <button class="hire-option-btn" onclick="window.location.href='tel:+254742555198'">
+                    <svg width="22" height="22" fill="none" stroke="gold" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92V21a2 2 0 0 1-2.18 2A19.72 19.72 0 0 1 3 5.18 2 2 0 0 1 5 3h4.09a2 2 0 0 1 2 1.72c.13 1.13.37 2.23.72 3.28a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c1.05.35 2.15.59 3.28.72A2 2 0 0 1 22 16.92z"/></svg>
+                    Call
+                </button>
+                <button class="hire-option-btn" onclick="window.open('https://wa.me/254742555198','_blank')">
+                    <svg width="22" height="22" fill="none" stroke="gold" stroke-width="2" viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.12.55 4.13 1.6 5.92L0 24l6.18-1.62A11.93 11.93 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 22c-1.85 0-3.63-.5-5.18-1.44l-.37-.22-3.67.96.98-3.57-.24-.37A9.93 9.93 0 0 1 2 12c0-5.52 4.48-10 10-10s10 4.48 10 10-4.48 10-10 10zm5.2-7.8c-.28-.14-1.65-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.12-.12.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.97.95-.97 2.32 0 1.37.99 2.7 1.13 2.89.14.18 1.95 2.98 4.74 4.06.66.28 1.18.45 1.58.58.66.21 1.26.18 1.73.11.53-.08 1.65-.67 1.89-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.18-.53-.32z"/></svg>
+                    WhatsApp
+                </button>
+            </div>
+            <div style="font-size:0.98rem;color:#333;opacity:0.7;">Choose your preferred method</div>
+        </div>
+    </div>
+    <script>
+        // Navigation morph transitions
+        const navLinks = document.querySelectorAll('nav a');
+        const sections = document.querySelectorAll('main section');
+        navLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                const sectionId = link.getAttribute('data-section');
+                sections.forEach(sec => {
+                    if (sec.id === sectionId) {
+                        sec.classList.add('active');
+                    } else {
+                        sec.classList.remove('active');
+                    }
+                });
+                window.scrollTo({top:0, behavior:'smooth'});
+            });
+        });
+
+        // Hire Me Modal logic
+        function showHireModal() {
+            document.getElementById('hire-modal-bg').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeHireModal() {
+            document.getElementById('hire-modal-bg').style.display = 'none';
+            document.body.style.overflow = '';
+            // Unfreeze if frozen
+            document.getElementById('hire-modal').classList.remove('frozen');
+        }
+        function toggleFreeze(e) {
+            e.stopPropagation();
+            const modal = document.getElementById('hire-modal');
+            modal.classList.toggle('frozen');
+        }
+        // Close modal on background click (if not frozen)
+        document.getElementById('hire-modal-bg').addEventListener('click', function(e){
+            if(e.target === this && !document.getElementById('hire-modal').classList.contains('frozen')) {
+                closeHireModal();
+            }
+        });
+        // ESC to close modal (if not frozen)
+        document.addEventListener('keydown', function(e){
+            if(e.key === "Escape" && document.getElementById('hire-modal-bg').style.display === 'flex' && !document.getElementById('hire-modal').classList.contains('frozen')) {
+                closeHireModal();
+            }
+        });
+
+        // Animated Goldy Stars and Flowers - now more visible and rise from both left and right of cards
+        function randomBetween(a, b) {
+            return a + Math.random() * (b - a);
+        }
+        function createStarOrnament(card, side) {
+            const el = document.createElement('div');
+            el.className = 'floating-ornament';
+            // Make stars larger and more visible
+            const scale = randomBetween(1.1, 1.7);
+            el.style.setProperty('--scale', scale);
+
+            // Position: left or right of the card
+            el.style.top = 'auto';
+            el.style.bottom = '-30px';
+            el.style.left = side === 'left' ? '-32px' : 'calc(100% + 2px)';
+            el.style.pointerEvents = 'none';
+
+            // Animation duration and delay
+            const duration = randomBetween(3.5, 6.5);
+            const delay = randomBetween(0, 1.5);
+            el.style.animationDuration = duration + 's';
+            el.style.animationDelay = delay + 's';
+
+            // SVG: Brighter, more glow
+            el.innerHTML = `<svg width="38" height="38" viewBox="0 0 32 32" fill="none" style="filter:drop-shadow(0 0 16px #FFD700cc)">
+                <polygon points="16,2 20,12 31,12 22,19 25,30 16,23 7,30 10,19 1,12 12,12"
+                    fill="#FFD700" stroke="#FFF8DC" stroke-width="2"/>
+            </svg>`;
+
+            // Insert into card
+            card.appendChild(el);
+
+            // Remove after animation
+            setTimeout(() => el.remove(), (duration + delay) * 1000);
+        }
+
+        // For each gold-card, periodically spawn stars on left and right
+        function startCardStars() {
+            const cards = document.querySelectorAll('.gold-card');
+            cards.forEach(card => {
+                // Initial burst
+                createStarOrnament(card, 'left');
+                createStarOrnament(card, 'right');
+                // Periodic
+                setInterval(() => createStarOrnament(card, Math.random() < 0.5 ? 'left' : 'right'), randomBetween(2500, 4000));
+            });
+        }
+
+        // Call after DOM loaded
+        window.addEventListener('DOMContentLoaded', startCardStars);
+
+        // Optionally, keep some floating stars/flowers globally for background
+        function createOrnament(type) {
+            const el = document.createElement('div');
+            el.className = 'floating-ornament';
+            // Make background stars more visible
+            const scale = randomBetween(1.0, 1.5);
+            el.style.setProperty('--scale', scale);
+            // Only left 10vw to right 90vw, so not to overlap cards' stars
+            const left = randomBetween(10, 90);
+            const duration = randomBetween(7, 13);
+            const delay = randomBetween(0, 7);
+            el.style.left = left + 'vw';
+            el.style.bottom = '-60px';
+            el.style.animationDuration = duration + 's';
+            el.style.animationDelay = delay + 's';
+            el.innerHTML = type === 'star'
+                ? `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="filter:drop-shadow(0 0 12px #FFD700cc)">
+                    <polygon points="16,2 20,12 31,12 22,19 25,30 16,23 7,30 10,19 1,12 12,12"
+                        fill="#FFD700" stroke="#FFF8DC" stroke-width="2"/>
+                </svg>`
+                : `<svg width="32" height="32" viewBox="0 0 32 32" style="filter:drop-shadow(0 0 10px #FFD700bb)">
+                    <circle cx="16" cy="16" r="7" fill="#FFD700" stroke="#BFA100" stroke-width="2"/>
+                    <ellipse cx="16" cy="5" rx="3" ry="7" fill="#FFF8DC" opacity="0.7"/>
+                    <ellipse cx="27" cy="16" rx="7" ry="3" fill="#FFF8DC" opacity="0.7"/>
+                    <ellipse cx="16" cy="27" rx="3" ry="7" fill="#FFF8DC" opacity="0.7"/>
+                    <ellipse cx="5" cy="16" rx="7" ry="3" fill="#FFF8DC" opacity="0.7"/>
+                </svg>`;
+            el.style.pointerEvents = 'none';
+            document.getElementById('ornaments').appendChild(el);
+            setTimeout(() => el.remove(), (duration + delay) * 1000);
+        }
+        setInterval(() => {
+            createOrnament(Math.random() < 0.7 ? 'star' : 'flower');
+        }, 1200);
+        for(let i=0;i<8;i++) setTimeout(() => createOrnament(Math.random()<0.7?'star':'flower'), i*300);
+    </script>
+</body>
+</html>
